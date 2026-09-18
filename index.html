@@ -7,29 +7,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="game-shell">
-    <header class="topbar">
-      <div><p class="eyebrow">ARCADE ROUGELITE</p><h1>Pong: Relic Run</h1></div>
-      <div class="run-stats"><span>Relíquias <strong id="relic-count">0</strong></span><span>Combo <strong id="combo-count">0</strong></span></div>
-    </header>
-    <p class="instructions">Mouse ou setas ↑/↓ para mover. A cada 2 pontos, escolha uma relíquia para ficar mais forte.</p>
-    <div class="scoreboard" aria-label="Placar">
-      <span>Jogador: <strong id="player-score">0</strong></span>
-      <span>Computador: <strong id="computer-score">0</strong></span>
-    </div>
-    <div class="active-relics" id="active-relics" aria-label="Relíquias ativas"></div>
-    <canvas id="game-canvas" width="900" height="520" aria-label="Jogo Pong"></canvas>
-    <button id="restart-button" type="button">Reiniciar partida</button>
+  <main class="app-shell">
+    <section class="screen menu-screen" id="menu-screen">
+      <div class="brand"><span class="eyebrow">ARCADE ROUGELITE</span><h1>PONG <em>2.5D</em></h1><p>Uma batalha neon com profundidade, relíquias e estilo.</p></div>
+      <form class="settings-panel" id="settings-form">
+        <label>Velocidade inicial <output id="speed-value">6</output><input id="speed" type="range" min="3" max="11" value="6"></label>
+        <label>Cor da sua raquete <input id="player-color" type="color" value="#67e8f9"></label>
+        <label>Cor da IA <input id="computer-color" type="color" value="#f472b6"></label>
+        <label>Tema do campo <select id="theme"><option value="neon">Neon</option><option value="matrix">Matrix</option><option value="sunset">Pôr do sol</option><option value="ice">Gelo</option></select></label>
+        <label>Dificuldade da IA <select id="difficulty"><option value="easy">Fácil</option><option value="normal" selected>Normal</option><option value="hard">Difícil</option></select></label>
+        <label>Tamanho das raquetes <select id="paddle-size"><option value="small">Pequenas</option><option value="normal" selected>Normais</option><option value="large">Grandes</option></select></label>
+        <label>Bolas iniciais <select id="ball-mode"><option value="one" selected>Uma bola</option><option value="two">Duas bolas</option></select></label>
+        <label class="toggle"><input id="effects" type="checkbox" checked> Efeitos de brilho e partículas</label>
+        <button class="primary" type="submit">Jogar</button>
+      </form>
+    </section>
+
+    <section class="screen game-screen" id="game-screen" hidden>
+      <header class="game-header"><div><span class="eyebrow">PONG: RELIC RUN</span><h2>Batalha dimensional</h2></div><div class="score"><span>VOCÊ <b id="player-score">0</b></span><span>IA <b id="computer-score">0</b></span></div><button class="small-button" id="menu-button">Menu</button></header>
+      <div class="relics" id="relics"></div>
+      <div class="arena-wrap"><canvas id="game-canvas" width="900" height="520" aria-label="Jogo Pong"></canvas></div>
+      <p class="hint">Mouse ou setas ↑/↓ para mover · Esc pausa</p>
+    </section>
   </main>
 
-  <section class="choice-overlay" id="choice-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="choice-title">
-    <div class="choice-panel">
-      <p class="eyebrow">NOVA RELÍQUIA DESBLOQUEADA</p>
-      <h2 id="choice-title">Escolha uma carta</h2>
-      <p class="choice-subtitle">Seu ponto ativou uma recompensa. Escolha uma das três cartas.</p>
-      <div class="cards" id="cards"></div>
-    </div>
-  </section>
+  <section class="overlay" id="choice-overlay" hidden><div class="choice-panel"><span class="eyebrow">RECOMPENSA</span><h2>Escolha uma relíquia</h2><p>A cada 2 pontos totais a arena pausa para você escolher.</p><div class="cards" id="cards"></div></div></section>
   <script src="script.js"></script>
 </body>
 </html>
