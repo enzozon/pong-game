@@ -3,20 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pong</title>
+  <title>Pong: Relic Run</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="game-shell">
-    <h1>Pong</h1>
-    <p class="instructions">Controle a raquete esquerda com o mouse ou com as setas ↑ e ↓.</p>
+    <header class="topbar">
+      <div><p class="eyebrow">ARCADE ROUGELITE</p><h1>Pong: Relic Run</h1></div>
+      <div class="run-stats"><span>Relíquias <strong id="relic-count">0</strong></span><span>Combo <strong id="combo-count">0</strong></span></div>
+    </header>
+    <p class="instructions">Mouse ou setas ↑/↓ para mover. A cada 2 pontos, escolha uma relíquia para ficar mais forte.</p>
     <div class="scoreboard" aria-label="Placar">
       <span>Jogador: <strong id="player-score">0</strong></span>
       <span>Computador: <strong id="computer-score">0</strong></span>
     </div>
+    <div class="active-relics" id="active-relics" aria-label="Relíquias ativas"></div>
     <canvas id="game-canvas" width="900" height="520" aria-label="Jogo Pong"></canvas>
-    <button id="restart-button" type="button">Reiniciar jogo</button>
+    <button id="restart-button" type="button">Reiniciar partida</button>
   </main>
+
+  <section class="choice-overlay" id="choice-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="choice-title">
+    <div class="choice-panel">
+      <p class="eyebrow">NOVA RELÍQUIA DESBLOQUEADA</p>
+      <h2 id="choice-title">Escolha uma carta</h2>
+      <p class="choice-subtitle">Seu ponto ativou uma recompensa. Escolha uma das três cartas.</p>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
   <script src="script.js"></script>
 </body>
 </html>
