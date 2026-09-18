@@ -1,37 +1,8 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pong: Relic Run</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main class="app-shell">
-    <section class="screen menu-screen" id="menu-screen">
-      <div class="brand"><span class="eyebrow">ARCADE ROUGELITE</span><h1>PONG <em>2.5D</em></h1><p>Uma batalha neon com profundidade, relíquias e estilo.</p></div>
-      <form class="settings-panel" id="settings-form">
-        <label>Velocidade inicial <output id="speed-value">6</output><input id="speed" type="range" min="3" max="11" value="6"></label>
-        <label>Cor da sua raquete <input id="player-color" type="color" value="#67e8f9"></label>
-        <label>Cor da IA <input id="computer-color" type="color" value="#f472b6"></label>
-        <label>Tema do campo <select id="theme"><option value="neon">Neon</option><option value="matrix">Matrix</option><option value="sunset">Pôr do sol</option><option value="ice">Gelo</option></select></label>
-        <label>Dificuldade da IA <select id="difficulty"><option value="easy">Fácil</option><option value="normal" selected>Normal</option><option value="hard">Difícil</option></select></label>
-        <label>Tamanho das raquetes <select id="paddle-size"><option value="small">Pequenas</option><option value="normal" selected>Normais</option><option value="large">Grandes</option></select></label>
-        <label>Bolas iniciais <select id="ball-mode"><option value="one" selected>Uma bola</option><option value="two">Duas bolas</option></select></label>
-        <label class="toggle"><input id="effects" type="checkbox" checked> Efeitos de brilho e partículas</label>
-        <button class="primary" type="submit">Jogar</button>
-      </form>
-    </section>
-
-    <section class="screen game-screen" id="game-screen" hidden>
-      <header class="game-header"><div><span class="eyebrow">PONG: RELIC RUN</span><h2>Batalha dimensional</h2></div><div class="score"><span>VOCÊ <b id="player-score">0</b></span><span>IA <b id="computer-score">0</b></span></div><button class="small-button" id="menu-button">Menu</button></header>
-      <div class="relics" id="relics"></div>
-      <div class="arena-wrap"><canvas id="game-canvas" width="900" height="520" aria-label="Jogo Pong"></canvas></div>
-      <p class="hint">Mouse ou setas ↑/↓ para mover · Esc pausa</p>
-    </section>
-  </main>
-
-  <section class="overlay" id="choice-overlay" hidden><div class="choice-panel"><span class="eyebrow">RECOMPENSA</span><h2>Escolha uma relíquia</h2><p>A cada 2 pontos totais a arena pausa para você escolher.</p><div class="cards" id="cards"></div></div></section>
-  <script src="script.js"></script>
-</body>
-</html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pong: Relic Run</title><link rel="stylesheet" href="style.css"></head>
+<body><main class="app-shell">
+<section id="menu-screen" class="screen menu-screen"><div class="brand"><span class="eyebrow">ARCADE ROUGELITE · 2.5D</span><h1>PONG <em>RELIC RUN</em></h1><p>Derrote rivais, ganhe XP e construa sua máquina de guerra.</p></div><form id="settings-form" class="settings-panel">
+<label>Velocidade inicial <output id="speed-value">6</output><input id="speed" type="range" min="3" max="11" value="6"></label><label>Cor da sua raquete <input id="player-color" type="color" value="#67e8f9"></label><label>Cor da IA <input id="computer-color" type="color" value="#f472b6"></label><label>Tema <select id="theme"><option value="neon">Neon</option><option value="matrix">Matrix</option><option value="sunset">Pôr do sol</option><option value="ice">Gelo</option></select></label><label>Dificuldade <select id="difficulty"><option value="easy">Fácil</option><option value="normal" selected>Normal</option><option value="hard">Difícil</option></select></label><label>Tamanho das raquetes <select id="paddle-size"><option value="small">Pequenas</option><option value="normal" selected>Normais</option><option value="large">Grandes</option></select></label><label>Bolas iniciais <select id="ball-mode"><option value="one">Uma</option><option value="two">Duas</option></select></label><label class="toggle"><input id="effects" type="checkbox" checked> Brilho, partículas e som</label><button class="primary" type="submit">Iniciar expedição</button></form></section>
+<section id="game-screen" class="screen game-screen" hidden><header class="game-header"><div><span class="eyebrow" id="stage-label">FASE 1 · RIVAL</span><h2 id="enemy-name">Sentinela Neon</h2></div><div class="score"><span>VOCÊ <b id="player-score">0</b></span><span>INIMIGO <b id="computer-score">0</b></span></div><button id="pause-button" class="small-button">Ⅱ</button><button id="menu-button" class="small-button">Menu</button></header><div class="hud"><div><span>VIDA DO INIMIGO</span><div class="bar hp"><i id="enemy-hp"></i></div></div><div><span>XP DA EXPEDIÇÃO <b id="level-label">NV. 1</b></span><div class="bar xp"><i id="xp-bar"></i></div></div><div class="wave" id="wave-label">ONDA 1/3</div></div><div id="relics" class="relics"></div><div class="arena-wrap"><canvas id="game-canvas" width="900" height="520"></canvas></div><p class="hint">Mouse ou setas ↑/↓ · Espaço pausa · Escolha uma carta a cada 2 pontos</p></section></main>
+<section id="choice-overlay" class="overlay" hidden><div class="choice-panel"><span class="eyebrow">RECOMPENSA DE COMBATE</span><h2>Escolha seu poder</h2><p>A arena está pausada. O efeito vale para toda a expedição.</p><div id="cards" class="cards"></div></div></section><section id="pause-overlay" class="overlay" hidden><div class="pause-panel"><span class="eyebrow">SISTEMA PAUSADO</span><h2>Respire, guerreiro</h2><button id="resume-button" class="primary">Continuar</button><button id="pause-menu-button" class="small-button">Voltar ao menu</button></div></section><script src="script.js"></script></body></html>
