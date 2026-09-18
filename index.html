@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pong</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <h1>Pong</h1>
+    <p class="instructions">Controle a raquete esquerda com o mouse ou com as setas ↑ e ↓.</p>
+    <div class="scoreboard" aria-label="Placar">
+      <span>Jogador: <strong id="player-score">0</strong></span>
+      <span>Computador: <strong id="computer-score">0</strong></span>
+    </div>
+    <canvas id="game-canvas" width="900" height="520" aria-label="Jogo Pong"></canvas>
+    <button id="restart-button" type="button">Reiniciar jogo</button>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
